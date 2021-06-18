@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            background-color: tomato;
+            color: white;
+            margin-right: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="number" id="enter">
+    <button id="bt1" onclick="click1()">左侧入</button>
+    <button id="bt2" onclick="click2()">右侧入</button>
+    <button id="bt3" onclick="click3()">左侧出</button>
+    <button id="bt4" onclick="click4()">右侧出</button>
+    <!--左右区别-->
+    <div id="box"></div>
+    <script>
+        //统一获取input的值
+        var input = document.getElementById('enter');
+        var div = document.getElementById('box');
+        console.log(div);
+        function click1() {
+            //事件处理,创建节点 
+            console.log(input.value);
+            var span = document.createElement('span');
+            span.innerHTML = input.value;
+
+            //给span添加事件，点击删除
+            span.click = function () {
+                console.log("delete");
+                this.parentNode.removeChild(this);
+            }
+            console.log(span);
+            var num = div.childNodes;
+            div.insertBefore(span, num[0]);
+            console.log(div);
+        }
+        function click2() {
+            //事件处理,创建节点
+            var span = document.createElement('span');
+            span.innerHTML = input.value;
+            console.log(span);
+            // //给span添加事件，点击删除
+            // span.click = function () {
+            //     div.removeChild(span);
+            // }
+            div.appendChild(span);
+            console.log(div);
+        }
+        function click3() {
+            var num = div.childNodes;
+            alert(num[0].innerHTML);
+            div.removeChild(num[0]);
+        }
+        function click4() {
+            var num = div.childNodes;
+            alert(num[num.length - 1].innerHTML);
+            div.removeChild(num[num.length - 1]);
+        }
+        for (var j = 0; j < button.length; j++) {
+            button[j].onclick = function () {
+                for (var i = 0; i < span.length; i++) {
+                    span[i].click = function () {
+                        div.removeChild(this);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

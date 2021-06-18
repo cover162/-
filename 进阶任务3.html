@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>进阶三</title>
+
+    <style>
+        #myDiv {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .add {
+            background-color: pink;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 50px;
+            margin-right: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <textarea name="" id="content" cols="20" rows="7" placeholder="请输入字符，并用不同分隔符分隔(请使用英文逗号，空格，回车来一次输入多个！！)"
+        style="font-size: 20px;"></textarea>
+    <button>插入</button>
+    <button>查询</button>
+    <input type="text" id="input1">
+    <div id="myDiv"></div>
+    <script>
+        var button = document.getElementsByTagName("button");
+        var content = document.getElementById("content");
+        var input = document.getElementById("input1");
+        var myDiv = document.getElementById("myDiv");
+        var myArray = new Array();
+        var i = 0, j = 0, h = 0;
+        var numberArray = new Array();
+        var index = new Array();
+        var moreDiv;
+        var tianjia = (i) => {
+            let newDiv = document.createElement("div");
+            let newDiv1 = document.createElement("div");
+            newDiv.classList.add("add");
+            myDiv.appendChild(newDiv);
+            newDiv.appendChild(newDiv1);
+            newDiv1.innerText = moreDiv[i];
+            myArray.push(newDiv1);
+            numberArray.push(newDiv1.innerText);
+        }
+        button[0].onclick = () => {
+            if (content.value.length == 0) {
+                alert("请在文本框中输入字符");
+            }
+            else {
+                moreDiv = content.value.split(/[\s|\,]/);
+                if (moreDiv.length > 1) {
+                    for (let i = 0; i <= moreDiv.length - 1; i++) {
+                        tianjia(i);
+                    }
+                }
+                else {
+                    tianjia(i);
+                }
+                content.value = "";
+            }
+        }
+        button[1].onclick = () => {
+            if (h > 0) {
+                for (let i = 0; i <= index.length - 1; i++) {
+                    myArray[index[i]].style.backgroundColor = "pink";
+                }
+                index.length = 0;
+            }
+            if (input.value == "") {
+                alert("请输入需要查找的字符！！");
+                return 0;
+            }
+            j = 0;
+            for (let i = 0; i <= numberArray.length - 1; i++) {
+                if (numberArray[i].indexOf(input.value) >= 0) {
+                    index.push(i);
+                    j++;
+                }
+            }
+            for (let i = 0; i <= index.length - 1; i++) {
+                myArray[index[i]].style.backgroundColor = "red";
+            }
+            input.value = "";
+            if (j == 0) {
+                alert("没有找到你需要的字符!!");
+            }
+            h++;
+        }
+
+    </script>
+
+</body>
+
+</html>

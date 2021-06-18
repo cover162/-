@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            display: inline-block;
+            background-color: tomato;
+
+        }
+    </style>
+</head>
+
+<body>
+    <input type="number" id="enter">
+    <button>左侧入</button>
+    <button>右侧入</button>
+    <button>左侧出</button>
+    <button>右侧出</button>
+    <button>排序</button>
+    <button>随机50</button>
+    <!--左右区别-->
+    <div id="box"></div>
+    <script>
+        var input = document.getElementById('enter');
+        var div = document.getElementById('box');
+        var button = document.getElementsByTagName('button');
+        var span = document.createElement('span');
+        button[0].onclick = function () {
+            var span = document.createElement('span');
+            span.style.length = input + 'px';
+            div.insertBefore(span, div.firstChild);
+            yangshi(span);
+            input = "";
+        }
+        button[1].onclick = function () {
+            var span = document.createElement('span');
+            span.innerHTML = input;
+            div.appendChild(span);
+            yangshi(span);
+            input = "";
+        }
+        button[2].onclick = function () {
+            div.removeChild(div.firstChild);
+        }
+        button[3].onclick = function () {
+            div.removeChild(div.lastChild);
+        }
+        button[4].onclick = function () {
+            var childs = box.childNodes;
+            var flag = false;    //记录是否存在交换，如果没有交换则退出
+
+            for (var i = 0; i < childs.length; i++) {
+
+                for (var j = 0; j < childs.length - 1; j++) {
+
+                    if (childs[j].style.height > childs[j + 1].style.height) {
+                        flag = true;
+                        var height = childs[j].style.height;
+                        childs[j].style.height = childs[j + 1].style.height;
+                        childs[j + 1].style.height = height;
+                    }
+
+                }
+                if (!flag) break;  //上一趟比较中不存在交换，则退出排序 
+            }
+        }
+        button[5].onclick = function () {
+            for (let i = 1; i <= 30; i++) {
+                input.value = 10 * (Math.floor(Math.random() * 10) + 1);
+                button[0].onclick();
+            }
+        }
+    </script>
+</body>
+
+</html>
